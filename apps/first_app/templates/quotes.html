@@ -1,0 +1,148 @@
+<html>
+
+<head>
+    <title>Quotes</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <!--
+    <h1>Author List</h1>
+    <ul>
+        {% for author in authors %}
+        <li>{{author.name}}
+            <ul>
+                {% for book in author.books.all %}
+                <li>
+                    <em>{{book.title}}</em>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+     -->
+    <h2> Welcome {{ firstname }}! </h2>
+    <input type='hidden' name='user_email' value={{ user_email }} />
+
+    <h2> Your Favorites:</h2>
+        <table style="width:100%">
+            <thead>
+                <tr>
+                    <th>Author</th>
+                    <th>Quote</th>
+                    <th>Posted By</th>
+                </tr>
+            </thead>
+            <tbody>
+    <!--
+     {% for x in comments %} {% if x.course.id == course.id %}
+    <p>{{x.author}} @{{x.created_at}}</p>
+    <h3>{{x.comment}}</h3>
+    {% endif %} {% endfor %}
+
+                    {% for item in all_items %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.user.firstname }}</td>
+                        <td>{{ item.created_at }}</td>
+                        <td>
+                            {% if user.first_name == firstname %}
+                            <a href="/remove_from_wishlist">Delete</a>
+                            {% else %}
+                            <a href="/remove_from_wishlist">Remove from my Wishlist</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+         -->
+
+                {% for quote in all_favoritequotes %}
+                <tr>
+                    <td>{{ quote.author }}</td>
+                    <td>{{ quote.quote }}</td>
+                    <td> Joe</td>
+                    <td><form action='/remove' method='POST'>
+                                {% csrf_token %}
+                                <input type='hidden' name='quote_id' value={{ quote.id }} />
+                                <input id="remove" type="submit" value="Remove From My List" />
+                            </form>
+                        </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    <h2> Quotable Quotes: </h2>
+            <table style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Author</th>
+                        <th>Quote</th>
+                        <th>Posted By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for qq in all_quotablequotes %}
+                    <tr>
+                        <td>{{ qq.author }}</td>
+                        <td>{{ qq.quote }}</td>
+                        <td>Posted by <a href="/posts_by_user">Oliver</a>
+                    {# NEED TO FIX #} {# {{ qq.user.first_name }} #} {# {{ qq.quote_posted_by.first_name }} #} {# {{ qq.users.first_name }} #}
+                    {# {{ user.first_name }} #} {# {{ qq.quotes.user.first_name }} #}</td>  {# .user.first_name? not qq.posted_by_id#}
+                        <td><form action='/add' method='POST'>
+                            {% csrf_token %}
+                            <input type='hidden' name='quote_id' value={{ qq.id }} />
+                            <input id="add" type="submit" value="Add to My List" />
+                        </form></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+<!--
+             posted_by_id=User.objects.get(email=user_email)
+-->
+        <h2> Contribute a Quote: </h2>
+            <form action='/contribute' method='POST'>
+                {% csrf_token %}
+<!--
+                <input type='hidden' name='item_id' value={{ item.id }} />
+-->
+                <label Quoted By: /label>
+                <input id="author" type="text" name='author'/>
+                <label Message: /label>
+                <input id="quote" type="text" name='quote'/>
+                <input id="submit" type="submit" value="Submit" />
+            </form>
+
+
+<!--
+            <form action='/add_new_item' method='POST'>
+                {% csrf_token %}
+                <input type='hidden' name='item_id' value={{ item.id }} />
+                <input id="add" type="submit" value="Add Item" />
+            </form>
+-->
+
+
+    <!--
+    <form action='/goback' method='POST'>
+        <div class="result">
+            {% csrf_token %}
+
+            <p> <label>Your Name: </label> {{ name }} </p>
+            <p> <label>Dojo Location: </label> {{ location }} </p>
+            <p> <label>Favorite Language: </label> {{ fave_language }} </p>
+            <p> <label>Comment: {{ comment }} </p>
+
+            <p> <input id="submit" type="submit" value="Go Back" name="submit"> </p>
+        </div>
+    </form>
+     -->
+
+    
+</body>
+
+</html>

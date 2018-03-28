@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    <title>Login and Registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <h1>Login and Registration</h1>
+    <!--
+       
+        -->
+
+    {% if messages %} 
+        {% for message in messages %}
+            <h1 style="color: red">{{ message }}</h1>
+        {% endfor %} {% endif %}
+    
+    <div class="wrapper">
+    <!--
+        {# {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %} #}
+        {# <h1 id="response">{{message}}</h1> #}
+        {# {% endfor %} {% endif %} {% endwith %} #}
+    -->
+        <form action='/register' method='POST'>
+            <div class="forms">
+                {% csrf_token %}
+                <p></p>
+                <h2> Register here if you do not already have an account: </h2>
+                <p><label>First Name: </label>
+                <input type="text" name="firstname" id="firstname"></p>
+                <p><label>Last Name: </label>
+                <input type="text" name="lastname" id="lastname"></p>
+                <p><label>Email: </label>
+                <input type="text" name="email" id="email"></p>
+                <p><label>Birthdate: </label>
+                <input type="text" name="birthday" id="birthday"></p>
+                <p><label>Password: </label>
+                <input type="password" name="password" id="password"></p>
+                <p><label>Confirm password: </label>
+                <input type="password" name="confirmpassword" id="confirmpassword"></p>
+                <p><input id="register" type="submit" value="Register" name="submit"></p>
+            </div>
+        </form>
+    
+        <form action='/login' method='POST'>
+            <div class="forms">
+                {% csrf_token %}
+                <h2> OR Login here with your email if you already have an account: </h2>
+                <p></p><label>Email: </label>
+                <input type="text" name="email" id="password"></p>
+                <p><label>Password: </label>
+                <input type="password" name="password" id="password"></p>
+                <p><input id="login" type="submit" value="Login" name="submit"></p>
+            </div>
+        </form>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<html>
+
+<head>
+    <title>Wish List</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <!--
+    <h1>Author List</h1>
+    <ul>
+        {% for author in authors %}
+        <li>{{author.name}}
+            <ul>
+                {% for book in author.books.all %}
+                <li>
+                    <em>{{book.title}}</em>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+     -->
+    <h2> Posts by {{ firstname }}! </h2>
+    <input type='hidden' name='user_email' value={{ user_email }} />
+    <h2> Count: {count}</count></h2>
+
+
+    <!--
+     {% for x in comments %} {% if x.course.id == course.id %}
+    <p>{{x.author}} @{{x.created_at}}</p>
+    <h3>{{x.comment}}</h3>
+    {% endif %} {% endfor %}
+         -->
+
+    {% for post in all_userposts %}
+        <p>{{ post.author }}: {{ post.quote }}</p>
+    {% endfor %}
+
+    <a href="/success">Dashboard</a>
+
+    <a href="/logout">Logout</a>
+
+
+
+
+ 
+                    <!--
+                            <form action='/add' method='POST'>
+                                {% csrf_token %}
+                                <input type='hidden' name='item_id' value={{ item.id }} />
+                                <input id="add" type="submit" value="Add" />
+                            </form>
+                                        -->
+  
+</body>
+
+</html>
